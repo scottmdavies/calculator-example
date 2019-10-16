@@ -1,8 +1,10 @@
 import streamlit as st
+import plotly.figure_factory as ff
+import numpy as np
 
 # API: https://streamlit.io/docs/api.html#
 
-st.title('Distillery Calculator')
+st.title('Malt Distillery')
 
 st.header('Operations')
 
@@ -59,5 +61,19 @@ if st.checkbox(label='Advanced', value=False):
 
 st.header('Distillation')
 
+st.subheader('Wash stills')
+wash_still_number = st.slider(label='Wash stills:', min_value=1, max_value=30, value=6, step=1,format=None)
+wash_still_volume = st.slider(label='Wash Still Volume (m3):', min_value=1, max_value=30, value=10, step=1,format=None)
+
+st.subheader('Spirit stills')
+spirit_still_number = st.slider(label='Spirit stills:', min_value=1, max_value=30, value=6, step=1,format=None)
+spirit_still_volume = st.slider(label='Spirit Still Volume (m3):', min_value=1, max_value=30, value=10, step=1,format=None)
+
 if st.checkbox(label='Advanced', value=False):
     pass
+
+#st.header('Utilities')
+
+#st.header('Production Schedule')
+
+st.button('Save')
