@@ -86,8 +86,6 @@ spirit_stills_week = hours_week / spirit_still_time
 spirit_still_capacity_week = (spirit_still_number * spirit_stills_week) * spirit_still_volume
 st.write('Spirit still capacity (m3) per week:', int(spirit_still_capacity_week))
 
-st.write('Pot Ale (m3) per week:', int(1.0))
-st.write('Spent Lees (m3) per week:', int(1.0))
 
 new_make_spirit_volume_week = wort_volume_week * 0.11
 st.write('New Makes Spirit (m3) per week:', int(new_make_spirit_volume_week))
@@ -97,8 +95,6 @@ st.write('Spent Lees (m3) per week:', int(spent_lees_volume_week))
 
 if st.checkbox(label='Advanced', value=False):
     pass
-
-st.write('Bottles (70cl) per week:', int(1.0))
 
 #st.header('Utilities')
 
