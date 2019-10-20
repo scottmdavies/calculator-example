@@ -47,10 +47,13 @@ st.header('Fermentation')
 fermenter_number = st.slider(label='Washbacks:', min_value=1, max_value=50, value=14, step=1,format=None)
 fermenter_volume = st.slider(label='Washback Volume (m3):', min_value=1, max_value=100, value=60, step=1,format=None)
 fermentation_time = st.slider(label='Fermentation Time (h):', min_value=20, max_value=120, value=65, step=1,format=None)
+fermentation_abv = st.slider(label='Fermentation ABV (%):', min_value=1, max_value=15, value=8, step=1,format=None)
 
 hours_week = 24 * 7 # 168
 fermentations_week = hours_week / fermentation_time 
 fermentation_capacity_week = (fermenter_number * fermentations_week) * fermenter_volume
+fermentation_alcohol = fermenter_volume * fermentation_abv
+fermentation_water = fermenter_volume - fermentation_alcohol
 st.write('Fermentation capacity (m3) per week:', int(fermentation_capacity_week))
 
 if wort_volume_week > fermentation_capacity_week:
@@ -65,9 +68,20 @@ st.subheader('Wash stills')
 wash_still_number = st.slider(label='Wash stills:', min_value=1, max_value=30, value=6, step=1,format=None)
 wash_still_volume = st.slider(label='Wash Still Volume (m3):', min_value=1, max_value=30, value=10, step=1,format=None)
 
+pot_ale_volume_week = wort_volume_week * 0.65
+st.write('Pot Ale (m3) per week:', int(pot_ale_volume_week))
+#low_wines_volume_week = wort_volume_week * 0.35
+#st.write('Low Wines (m3) per week:', int(low_wines_volume_week))
+
 st.subheader('Spirit stills')
 spirit_still_number = st.slider(label='Spirit stills:', min_value=1, max_value=30, value=6, step=1,format=None)
 spirit_still_volume = st.slider(label='Spirit Still Volume (m3):', min_value=1, max_value=30, value=10, step=1,format=None)
+
+new_make_spirit_volume_week = wort_volume_week * 0.11
+st.write('New Makes Spirit (m3) per week:', int(new_make_spirit_volume_week))
+
+spent_lees_volume_week = wort_volume_week * 0.28
+st.write('Spent Lees (m3) per week:', int(spent_lees_volume_week))
 
 if st.checkbox(label='Advanced', value=False):
     pass
