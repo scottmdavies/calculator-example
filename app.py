@@ -48,10 +48,13 @@ st.header('Fermentation')
 fermenter_number = st.slider(label='Washbacks:', min_value=1, max_value=50, value=14, step=1,format=None)
 fermenter_volume = st.slider(label='Washback Volume (m3):', min_value=1, max_value=100, value=60, step=1,format=None)
 fermentation_time = st.slider(label='Fermentation Time (h):', min_value=20, max_value=120, value=65, step=1,format=None)
+fermentation_abv = st.slider(label='Fermentation ABV (%):', min_value=1, max_value=15, value=8, step=1,format=None)
 
 hours_week = 24 * 7 # 168
 fermentations_week = hours_week / fermentation_time 
 fermentation_capacity_week = (fermenter_number * fermentations_week) * fermenter_volume
+fermentation_alcohol = fermenter_volume * fermentation_abv
+fermentation_water = fermenter_volume - fermentation_alcohol
 st.write('Fermentation capacity (m3) per week:', int(fermentation_capacity_week))
 
 if wort_volume_week > fermentation_capacity_week:
@@ -70,6 +73,11 @@ wash_stills_week = hours_week / wash_still_time
 wash_still_capacity_week = (wash_still_number * wash_stills_week) * wash_still_volume
 st.write('Wash still capacity (m3) per week:', int(wash_still_capacity_week))
 
+pot_ale_volume_week = wort_volume_week * 0.65
+st.write('Pot Ale (m3) per week:', int(pot_ale_volume_week))
+#low_wines_volume_week = wort_volume_week * 0.35
+#st.write('Low Wines (m3) per week:', int(low_wines_volume_week))
+
 st.subheader('Spirit stills')
 spirit_still_number = st.slider(label='Spirit stills:', min_value=1, max_value=30, value=3, step=1,format=None)
 spirit_still_volume = st.slider(label='Spirit Still Volume (m3):', min_value=1, max_value=30, value=8, step=1,format=None)
@@ -78,13 +86,15 @@ spirit_stills_week = hours_week / spirit_still_time
 spirit_still_capacity_week = (spirit_still_number * spirit_stills_week) * spirit_still_volume
 st.write('Spirit still capacity (m3) per week:', int(spirit_still_capacity_week))
 
-st.write('Pot Ale (m3) per week:', int(1.0))
-st.write('Spent Lees (m3) per week:', int(1.0))
+
+new_make_spirit_volume_week = wort_volume_week * 0.11
+st.write('New Makes Spirit (m3) per week:', int(new_make_spirit_volume_week))
+
+spent_lees_volume_week = wort_volume_week * 0.28
+st.write('Spent Lees (m3) per week:', int(spent_lees_volume_week))
 
 if st.checkbox(label='Advanced', value=False):
     pass
-
-st.write('Bottles (70cl) per week:', int(1.0))
 
 #st.header('Utilities')
 
