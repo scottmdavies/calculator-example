@@ -88,6 +88,14 @@ st.write('Bottles (70cl) per week:', int(1.0))
 
 #st.header('Utilities')
 
-#st.header('Production Schedule')
+st.header('Production Schedule')
 
-st.button('Save')
+df = [dict(Task="Job A", Start='2009-01-01', Finish='2009-02-28'),
+      dict(Task="Job B", Start='2009-03-05', Finish='2009-04-15'),
+      dict(Task="Job C", Start='2009-02-20', Finish='2009-05-30')]
+
+fig = ff.create_gantt(df,title='',)
+st.plotly_chart(fig)
+
+
+#st.button('Save')
